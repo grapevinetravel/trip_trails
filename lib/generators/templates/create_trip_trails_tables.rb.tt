@@ -1,0 +1,26 @@
+class CreateTripTrailsTables < ActiveRecord::Migration[6.0]
+  def change
+    unless table_exists?(:trip_trails)
+      create_table :trip_trails do |t|
+        t.jsonb 'input'
+        t.jsonb 'process'
+        t.jsonb 'output'
+        t.string 'ext_id'
+        t.bigint 'trip_batch_id'
+        t.string 'status'
+        t.string 'status_explanation'
+        t.string 'tmc'
+        t.index ['trip_batch_id'], name: 'index_trip_trails_on_trip_batch_id'
+      end
+    end
+    unless table_exists?(:trip_trail_events)
+      create_table :trip_trail_events do |t|
+        t.string 'name'
+        t.integer 'batch_id'
+        t.bigint 'trip_trail_id'
+        t.string 'ext_id'
+        t.index ['trip_trail_id'], name: 'index_trip_trail_events_on_trip_trail_id'
+      end
+    end
+  end
+end
