@@ -16,5 +16,3 @@ gem 'dry-transaction'
 gem 'dry-validation', '~> 1.6'
 
 gem 'activerecord'
-
-gem 'require_all'
