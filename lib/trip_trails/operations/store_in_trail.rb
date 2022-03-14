@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'dry/transaction/operation'
+require 'dry/validation/contract'
 
 class StoreInTrail
   include Dry::Transaction::Operation
