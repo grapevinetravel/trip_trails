@@ -33,9 +33,7 @@ class StoreInTrail
       ).last
 
     if trip_trail.present?
-      if input_block.present?
-        trip_trail.update(input: trip_trail.input&.merge!(input_block))
-      end
+      trip_trail.update(input: trip_trail.input&.merge!(input_block)) if input_block.present?
       if output_block.present?
         if trip_trail.output.present?
           trip_trail.update(output: trip_trail.output&.merge!(output_block))
@@ -44,13 +42,9 @@ class StoreInTrail
           trip_trail.save
         end
       end
-      if process_block.present?
-        trip_trail.update(process: trip_trail.process&.merge!(process_block))
-      end
+      trip_trail.update(process: trip_trail.process&.merge!(process_block)) if process_block.present?
       trip_trail.update(status: status) if status.present?
-      if status_explanation.present?
-        trip_trail.update(status_explanation: status_explanation)
-      end
+      trip_trail.update(status_explanation: status_explanation) if status_explanation.present?
     else
       trip_trail =
         TripTrail.create(
