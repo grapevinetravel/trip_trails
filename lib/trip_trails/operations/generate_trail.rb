@@ -20,9 +20,7 @@ class GenerateTrail
       else
         input.fetch(:active_trip_id)
       end
-    if input.keys.exclude?(:active_trip_id)
-      input.merge!({ active_trip_id: active_trip_id })
-    end
+    input.merge!({ active_trip_id: active_trip_id }) if input.keys.exclude?(:active_trip_id)
 
     trip_trail =
       TripTrail.find_by(trip_batch_id: trips_batch_id, ext_id: active_trip_id)

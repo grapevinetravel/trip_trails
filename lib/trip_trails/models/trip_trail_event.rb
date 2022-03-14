@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_record'
+
 class TripTrailEvent < ActiveRecord::Base
   EVENTS = {
     born: 'Trip born',
