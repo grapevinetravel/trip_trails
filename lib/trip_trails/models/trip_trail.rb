@@ -3,6 +3,8 @@
 require 'active_record'
 
 class TripTrail < ActiveRecord::Base
+  scope :communication_sent, -> { where(status: STATUS[:success], status_explanation: 'Communication sent') }
+
   STATUS = {
     delayed: 'delayed',
     discarded: 'discarded',
