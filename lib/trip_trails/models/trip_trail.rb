@@ -3,6 +3,13 @@
 require 'active_record'
 
 class TripTrail < ActiveRecord::Base
+  scope :communication_sent, lambda {
+                               where(status: STATUS[:success], status_explanation: STATUS_EXPLANATION[:comm_sent])
+                             }
+
+  STATUS_EXPLANATION = {
+    comm_sent: 'Communication sent'
+  }.freeze
   STATUS = {
     delayed: 'delayed',
     discarded: 'discarded',
