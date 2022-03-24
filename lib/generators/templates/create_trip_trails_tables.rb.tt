@@ -3,7 +3,7 @@ class CreateTripTrailsTables < ActiveRecord::Migration[6.0]
     unless table_exists?(:trip_trails)
       create_table :trip_trails do |t|
         t.jsonb 'input'
-        t.jsonb 'process'
+        t.jsonb 'process', default: {}
         t.jsonb 'output'
         t.string 'ext_id'
         t.bigint 'trip_batch_id'
