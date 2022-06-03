@@ -11,16 +11,7 @@ class GenerateTrail
       input.try(:[], :client) || input.try(:[], :context_tmc).try(:name)
 
     # TODO: work out why input[:active_trip_json] can be 'null' and cast it to nil
-    active_trip_id =
-      if input[:active_trip_json].present? &&
-         input[:active_trip_json] != 'null'
-        json = JSON.parse(input.fetch(:active_trip_json))
-        json['trip_details']['trip_id'] if json.key?('trip_details')
-        json['TripId'] if json.key?('TripId')
-      else
-        input.fetch(:active_trip_id)
-      end
-    input.merge!({ active_trip_id: active_trip_id }) if input.keys.exclude?(:active_trip_id)
+    active_trip_id = input.fetch(:active_trip_id)
 
     trip_trail =
       TripTrail.find_by(trip_batch_id: trips_batch_id, ext_id: active_trip_id)
