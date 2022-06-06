@@ -12,6 +12,7 @@ class StoreInTrail
     schema { REQUIRED_VALUES.each { |val| required(val) } }
   end
 
+  # rubocop:disable  Metrics/AbcSize, Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
   def call(input)
     contract_errors = StoreInTrailContract.new.call(input).errors
     return Failure(contract_errors) unless contract_errors.empty?
@@ -62,4 +63,5 @@ class StoreInTrail
 
     trip_trail
   end
+  # rubocop:enable  Metrics/AbcSize, Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 end

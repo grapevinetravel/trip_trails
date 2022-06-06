@@ -5,6 +5,7 @@ require 'dry/transaction/operation'
 class GenerateTrail
   include Dry::Transaction::Operation
 
+  # rubocop:disable  Metrics/AbcSize, Metrics/MethodLength
   def call(input)
     trips_batch_id = input.fetch(:trips_batch_id)
     client =
@@ -34,4 +35,6 @@ class GenerateTrail
 
     Success(input.merge!({ trip_trail_id: trip_trail.id }))
   end
+
+  # rubocop:enable  Metrics/AbcSize, Metrics/MethodLength
 end
