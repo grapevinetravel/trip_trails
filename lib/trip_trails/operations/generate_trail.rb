@@ -5,22 +5,14 @@ require 'dry/transaction/operation'
 class GenerateTrail
   include Dry::Transaction::Operation
 
+  # rubocop:disable  Metrics/AbcSize, Metrics/MethodLength
   def call(input)
     trips_batch_id = input.fetch(:trips_batch_id)
     client =
       input.try(:[], :client) || input.try(:[], :context_tmc).try(:name)
 
     # TODO: work out why input[:active_trip_json] can be 'null' and cast it to nil
-    active_trip_id =
-      if input[:active_trip_json].present? &&
-         input[:active_trip_json] != 'null'
-        json = JSON.parse(input.fetch(:active_trip_json))
-        json['trip_details']['trip_id'] if json.key?('trip_details')
-        json['TripId'] if json.key?('TripId')
-      else
-        input.fetch(:active_trip_id)
-      end
-    input.merge!({ active_trip_id: active_trip_id }) if input.keys.exclude?(:active_trip_id)
+    active_trip_id = input.fetch(:active_trip_id)
 
     trip_trail =
       TripTrail.find_by(trip_batch_id: trips_batch_id, ext_id: active_trip_id)
@@ -43,4 +35,6 @@ class GenerateTrail
 
     Success(input.merge!({ trip_trail_id: trip_trail.id }))
   end
+
+  # rubocop:enable  Metrics/AbcSize, Metrics/MethodLength
 end

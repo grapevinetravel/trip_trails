@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trip_trails (0.1.9.6)
+    trip_trails (0.1.9.7)
 
 GEM
   remote: https://rubygems.org/
