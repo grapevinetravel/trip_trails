@@ -11,10 +11,11 @@ gem 'trip_trails'
 ```
 
 And then execute:
+```
     $ bundle install
     $ bundle exec rails generate trip_trails:install
     $ rake db:migrate
-
+```
 ## Usage
 
 This gem uses `dry-trasactions` and `dry-opertaions`. Most common calls are included as class files:
