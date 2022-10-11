@@ -32,22 +32,4 @@ class TripTrail < ActiveRecord::Base
   rescue StandardError
     ''
   end
-
-  def self.internal_id_equals(value)
-    begin
-      context_tmc = SelectedTravelCompany.last
-      return '' unless context_tmc.try(:has_custom_internal_id) == true
-      where(
-        "tmc = '#{context_tmc.selected_tmc_name || 'bbt'}' and process->>'internal_id' like (?)",
-        "%#{value}%"
-      )
-    rescue StandardError
-      ''
-    end
-  end
-
-  # this helper is here in case active_admin is used
-  def self.ransackable_scopes(_auth_object = nil)
-    %i[internal_id_equals]
-  end
 end
