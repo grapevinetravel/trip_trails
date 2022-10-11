@@ -28,7 +28,7 @@ class TripTrail < ActiveRecord::Base
   has_many :trip_trail_events
 
   def internal_id
-    self.process.with_indifferent_access[:internal_id]
+    process.with_indifferent_access[:internal_id]
   rescue StandardError
     ''
   end
