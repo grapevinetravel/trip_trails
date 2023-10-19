@@ -32,4 +32,16 @@ class TripTrail < ActiveRecord::Base
   rescue StandardError
     ''
   end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[
+      created_at ext_id id input output
+      process status status_explanation tmc
+      trip_batch_id updated_at
+    ]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    ['trip_trail_events']
+  end
 end
